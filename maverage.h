@@ -1,6 +1,7 @@
 #include <vector>
 using namespace std;
 
+bool test_moving_average();
 
-void show_vector(const vector<double> & sequence);
-vector<double> get_moving_average(const vector<double> & sequence, const int window=4);
+vector<double> get_moving_average(const vector<double> &, const int);
+vector<float> get_moving_average(const vector<float> &, const int);
