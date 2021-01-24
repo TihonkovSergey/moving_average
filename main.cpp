@@ -8,8 +8,8 @@ using namespace std;
 
 
 int main() {
-    int sequence_size = 1e6;
-    int iteration = 50;
+    int sequence_size = 1e7;
+    int iteration = 20;
 
     srand(unsigned(time(nullptr)));
 
@@ -17,15 +17,15 @@ int main() {
 
     for (auto window: windows){
         cout << "Window: " << window << "\n";
-        vector<float> sequence(sequence_size);
+        vector<double> sequence(sequence_size);
         
-        double cumulative_time = 0.0;
+        double elems_per_sec = 0.0;
         for(int i=0;i<iteration; i++){
             generate(sequence.begin(), sequence.end(), rand);
             clock_t tStart = clock();
-            vector<float> result = get_moving_average(sequence, window);
-            cumulative_time += (double)(clock() - tStart)/CLOCKS_PER_SEC;
+            vector<double> result = get_moving_average(sequence, window);
+            elems_per_sec += double(sequence_size) / ((double)(clock() - tStart)/CLOCKS_PER_SEC);
         }
-        printf("\tAverage time: %.8fs\n", cumulative_time / iteration);
+        printf("\tAverage elements per second: %.2f\n", elems_per_sec / iteration);
     }
 }
